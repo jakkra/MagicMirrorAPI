@@ -1,0 +1,2 @@
+# MagicMirrorAPI
+MagicMirror 
