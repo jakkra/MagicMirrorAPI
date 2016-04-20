@@ -2,6 +2,7 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import reddit.RedditApi;
+import reddit.RedditFlow;
 import smhi.Forecasts;
 
 import java.io.IOException;
@@ -18,12 +19,14 @@ public class Main {
 
 
     public static void main(String[] args) {
-
+        /*
         ObjectMapper mapper = new ObjectMapper();
 
         try {
             URLConnection connection = (new URL("https://www.reddit.com/hot.json")).openConnection();
 
+
+            // Not being used.
             Thread.sleep(2000); //Delay to comply with rate limiting
             connection.setRequestProperty("User-Agent", USER_AGENT);
 
@@ -36,6 +39,12 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
+        RedditFlow redditFlow = new RedditFlow("programming","hot");
+        RedditApi rApi = redditFlow.getFlow();
+
+        System.out.println(rApi.toString());
+
         SMHIWeatherAPI weatherAPI = new SMHIWeatherAPI("13.191", "55.704");
         Forecasts forecasts = weatherAPI.getForecasts();
         System.out.println(forecasts.toString());
