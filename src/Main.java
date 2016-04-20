@@ -15,31 +15,8 @@ import smhi.SMHIWeatherAPI;
 
 
 public class Main {
-    public static final String USER_AGENT = "Chrome";
-
 
     public static void main(String[] args) {
-        /*
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            URLConnection connection = (new URL("https://www.reddit.com/hot.json")).openConnection();
-
-
-            // Not being used.
-            Thread.sleep(2000); //Delay to comply with rate limiting
-            connection.setRequestProperty("User-Agent", USER_AGENT);
-
-            InputStream in = connection.getInputStream();
-
-            RedditApi reddit = mapper.readValue(in, RedditApi.class);
-            System.out.println(reddit.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
         RedditFlow redditFlow = new RedditFlow("programming","hot");
         RedditApi rApi = redditFlow.getFlow();
 
