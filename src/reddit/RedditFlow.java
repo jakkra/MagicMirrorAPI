@@ -22,7 +22,7 @@ public class RedditFlow {
         this.sortAfter = sortAfter;
     }
 
-    public ArrayList<RedditApi.Post> getFlow() {
+    public ArrayList<Post> getFlow() {
         ObjectMapper mapper = new ObjectMapper();
         URLConnection connection = null;
         try {

@@ -30,7 +30,7 @@ public class RedditApi {
     }
 
     public ArrayList<Post> getPosts(){
-        ArrayList<RedditApi.Post> posts = new ArrayList<>();
+        ArrayList<Post> posts = new ArrayList<>();
         for (Children c : data.getChildren()){
             posts.add(c.getData());
         }
@@ -107,67 +107,6 @@ public class RedditApi {
             return data.toString();
         }
     }
-    @JsonIgnoreProperties(ignoreUnknown = true)
 
-    public static class Post {
-        String subreddit;
-        String thumbnail;
-        String url;
-        String title;
-        String score;
-
-        public String getScore() {
-            return score;
-        }
-
-        public void setScore(String score) {
-            this.score = score;
-        }
-
-        public String getSubreddit() {
-            return subreddit;
-        }
-
-        public void setSubreddit(String subreddit) {
-            this.subreddit = subreddit;
-        }
-
-        public String getThumbnail() {
-            return thumbnail;
-        }
-
-        public void setThumbnail(String thumbnail) {
-            this.thumbnail = thumbnail;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-
-        @Override
-        public String toString() {
-            String s = subreddit + "\n" +
-                    thumbnail + "\n" +
-                    url + "\n" +
-                    title + "\n" +
-                    score + "\n";
-
-            return s;
-        }
-
-    }
 }
 
