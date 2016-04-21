@@ -29,6 +29,14 @@ public class RedditApi {
         this.kind = kind;
     }
 
+    public ArrayList<Post> getPosts(){
+        ArrayList<RedditApi.Post> posts = new ArrayList<>();
+        for (Children c : data.getChildren()){
+            posts.add(c.getData());
+        }
+        return posts;
+    }
+
 
     @Override
     public String toString() {
@@ -100,7 +108,8 @@ public class RedditApi {
         }
     }
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static class Post {
+
+    public static class Post {
         String subreddit;
         String thumbnail;
         String url;

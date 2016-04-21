@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 /**
  * Created by Kevin on 2016-04-20.
@@ -21,7 +22,7 @@ public class RedditFlow {
         this.sortAfter = sortAfter;
     }
 
-    public RedditApi getFlow() {
+    public ArrayList<RedditApi.Post> getFlow() {
         ObjectMapper mapper = new ObjectMapper();
         URLConnection connection = null;
         try {
@@ -40,6 +41,8 @@ public class RedditFlow {
             e.printStackTrace();
         }
 
-        return rApi;
+
+
+        return rApi.getPosts();
     }
 }

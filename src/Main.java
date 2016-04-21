@@ -1,26 +1,17 @@
-
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import reddit.RedditApi;
 import reddit.RedditFlow;
 import smhi.Forecasts;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
-
 import smhi.SMHIWeatherAPI;
+
+import java.util.ArrayList;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        RedditFlow redditFlow = new RedditFlow("programming","hot");
-        RedditApi rApi = redditFlow.getFlow();
-
-        System.out.println(rApi.toString());
+        RedditFlow redditFlow = new RedditFlow("programming", "hot");
+        ArrayList<RedditApi.Post> posts = redditFlow.getFlow();
+        System.out.println(posts);
 
         SMHIWeatherAPI weatherAPI = new SMHIWeatherAPI("13.191", "55.704");
         Forecasts forecasts = weatherAPI.getForecasts();

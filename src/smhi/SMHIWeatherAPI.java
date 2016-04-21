@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class SMHIWeatherAPI {
-
     private final String longitude;
     private final String latitude;
     private Forecasts forecasts;
@@ -30,9 +29,11 @@ public class SMHIWeatherAPI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return mapObjectToForecast(jsonObject);
+        forecasts =  mapObjectToForecast(jsonObject);
+        return forecasts;
     }
+
+
 
 
     private Forecasts mapObjectToForecast(JsonWeatherAsObject json) {
@@ -57,7 +58,7 @@ public class SMHIWeatherAPI {
                         hf.temp = value;
                         break;
                     case "vis":
-                        hf.viability = value;
+                        hf.visability = value;
                         break;
                     case "wd":
                         hf.windDirection = value;

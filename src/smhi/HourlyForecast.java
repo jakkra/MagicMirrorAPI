@@ -6,7 +6,7 @@ public class HourlyForecast {
     String validDate;
     double pressure;
     double temp;
-    double viability;
+    double visability;
     double windDirection;
     double windVelocity;
     double relativeHumidity;
@@ -31,7 +31,7 @@ public class HourlyForecast {
         return "ValidDate: " + validDate + "\n" +
                 "Pressure: " + pressure + "\n" +
                 "Temp: " + temp + "\n" +
-                "visability: " + viability + "\n" +
+                "visability: " + visability + "\n" +
                 "windDirection: " + windDirection + "\n" +
                 "windVelocity: " + windVelocity + "\n" +
                 "relativeHumidity: " + relativeHumidity + "\n" +
