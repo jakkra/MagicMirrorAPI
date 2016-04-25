@@ -1,5 +1,7 @@
 import reddit.Post;
 import reddit.RedditFlow;
+import skanetrafikenAPI.Journey;
+import skanetrafikenAPI.SkanetrafikenAPI;
 import smhi.Forecasts;
 import smhi.SMHIWeatherAPI;
 
@@ -16,6 +18,10 @@ public class Main {
         SMHIWeatherAPI weatherAPI = new SMHIWeatherAPI("13.191", "55.704");
         Forecasts forecasts = weatherAPI.getForecasts();
         System.out.println(forecasts.toString());
+
+        SkanetrafikenAPI skanetrafikenAPI = new SkanetrafikenAPI();
+        ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys("Värnhem", "Lund LTH", 5);
+        System.out.println(journeys.toString());
 
     }
 }
