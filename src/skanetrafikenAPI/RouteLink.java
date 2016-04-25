@@ -60,7 +60,7 @@ public class RouteLink {
     private String depDeviationAffect; //Describes how departure time deviation affects the journey.
     private String arrDeviationAffect; //Describes how arrival time deviation affects the journey.
     private String startPoint; // dep startPoint, eg "Läge D"
-    private String stopPoint; // arrival stopPoint -||-
+    private String stopPoint; // arrival stopPoint eg "Läge E"
 
     //Notes and comments
     private String publicNote;
