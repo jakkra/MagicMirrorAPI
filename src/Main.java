@@ -27,7 +27,7 @@ public class Main {
         System.out.println(journeys.toString());*/
 
         NewsMapper newsMapper = new NewsMapper();
-        NewsAPI nAPI = newsMapper.getNews();
-        System.out.println(nAPI.toString());
+        NewsAPI news = newsMapper.getNews();
+        System.out.println(news);
     }
 }
