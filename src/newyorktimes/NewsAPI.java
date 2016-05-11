@@ -1,8 +1,11 @@
 package newyorktimes;
 
-import java.util.ArrayDeque;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsAPI {
     private ArrayList<Results> results;
 
@@ -24,9 +27,12 @@ public class NewsAPI {
 
     }
 
-    static class Results{
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Results{
         public String title;
-        public String _abstract;
+
+        @JsonProperty(value = "abstract")
+        public String shortDescription;
         public String byline;
         public String published_date;
 
@@ -38,12 +44,12 @@ public class NewsAPI {
             this.title = title;
         }
 
-        public String get_abstract() {
-            return _abstract;
+        public String getShortDescription() {
+            return shortDescription;
         }
 
-        public void set_abstract(String _abstract) {
-            this._abstract = _abstract;
+        public void setShortDescription(String shortDescription) {
+            this.shortDescription = shortDescription;
         }
 
         public String getByline() {
@@ -64,7 +70,7 @@ public class NewsAPI {
 
         public String toString(){
             StringBuilder sb = new StringBuilder();
-            sb.append(getTitle() + "\n" + get_abstract()+"\n");
+            sb.append(getTitle() + "\n" + getShortDescription()+"\n");
             return sb.toString();
         }
     }
