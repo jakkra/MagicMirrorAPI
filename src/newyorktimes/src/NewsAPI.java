@@ -12,7 +12,17 @@ public class NewsAPI {
         this.results = results;
     }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (Results r: results) {
+            sb.append(r.toString() + "\n");
+        }
+        return sb.toString();
 
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static class Results{
         public String title;
         public String _abstract;
@@ -49,6 +59,12 @@ public class NewsAPI {
 
         public void setPublished_date(String published_date) {
             this.published_date = published_date;
+        }
+
+        public String toString(){
+            StringBuilder sb = new stringBuilder();
+            s.append(getTitle() + "\n" + get_abstract()+"\n");
+            return sb.toString();
         }
     }
 
