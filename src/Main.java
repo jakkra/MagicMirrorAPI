@@ -4,6 +4,9 @@ import skanetrafikenAPI.Journey;
 import skanetrafikenAPI.SkanetrafikenAPI;
 import smhi.Forecasts;
 import smhi.SMHIWeatherAPI;
+import newyorktimes.NewsMapper;
+import  newyorktimes.NewsAPI;
+
 
 import java.util.ArrayList;
 
@@ -23,8 +26,8 @@ public class Main {
         ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys("Värnhem", "Lund LTH", 5);
         System.out.println(journeys.toString());
 
-        NewsMapper newsMapper = new NewsMapper();
-        NewsAPI nAPI = newsMapper.getNews();
-        System.out.println(nAPI.toString());
+        //NewsMapper newsMapper = new NewsMapper();
+        //NewsAPI nAPI = newsMapper.getNews();
+        //System.out.println(nAPI.toString());
     }
 }

@@ -1,3 +1,5 @@
+package newyorktimes;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
@@ -22,7 +24,6 @@ public class NewsAPI {
 
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
     static class Results{
         public String title;
         public String _abstract;
@@ -62,8 +63,8 @@ public class NewsAPI {
         }
 
         public String toString(){
-            StringBuilder sb = new stringBuilder();
-            s.append(getTitle() + "\n" + get_abstract()+"\n");
+            StringBuilder sb = new StringBuilder();
+            sb.append(getTitle() + "\n" + get_abstract()+"\n");
             return sb.toString();
         }
     }
