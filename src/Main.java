@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        /*RedditFlow redditFlow = new RedditFlow("programming", "hot");
+        RedditFlow redditFlow = new RedditFlow("programming", "hot");
         ArrayList<Post> posts = redditFlow.getFlow();
         System.out.println(posts);
 
@@ -24,7 +24,7 @@ public class Main {
 
         SkanetrafikenAPI skanetrafikenAPI = new SkanetrafikenAPI();
         ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys("Värnhem", "Lund LTH", 5);
-        System.out.println(journeys.toString());*/
+        System.out.println(journeys.toString());
 
         NewsMapper newsMapper = new NewsMapper();
         NewsAPI news = newsMapper.getNews();
