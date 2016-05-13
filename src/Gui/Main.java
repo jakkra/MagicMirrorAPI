@@ -8,7 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import newyorktimes.NewsAPI;
 
@@ -16,9 +19,9 @@ import newyorktimes.NewsAPI;
 import java.io.IOException;
 
 public class Main extends Application {
-
     private Stage primaryStage;
-    private BorderPane rootLayout;
+    private AnchorPane rootLayout;
+
 
 
     @Override
@@ -36,13 +39,14 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
 
             loader.setLocation(Main.class.getResource("mainView.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = (AnchorPane) loader.load();
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
 
             primaryStage.setScene(scene);
             primaryStage.setMaximized(true);
             //primaryStage.setFullScreen(true);
+
             primaryStage.show();
 
         }catch(IOException e){
