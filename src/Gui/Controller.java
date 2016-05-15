@@ -36,7 +36,7 @@ public class Controller {
         textAreas = new TextArea[] {bottomLeftText,bottomRightText,topLeftText,topRightText};
         for(TextArea t : textAreas){
             t.setEditable(false);
-            
+
         }
         System.out.println("second");
     }
