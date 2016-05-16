@@ -1,81 +1,35 @@
 package newyorktimes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
+import java.net.URL;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsAPI {
-    private ArrayList<Results> results;
+	private News nAPI;
 
-    public ArrayList<Results> getResults() {
-        return results;
-    }
+	public NewsAPI(){
 
-    public void setResults(ArrayList<Results> results) {
-        this.results = results;
-    }
+	}
 
-    @Override
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        for (Results r: results) {
-            sb.append(r.toString() + "\n");
-        }
-        return sb.toString();
+	public News getNews(){
+		ObjectMapper mapper = new ObjectMapper();
+		URLConnection connection = null;
 
-    }
+		try{
+			connection = (new URL("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key=568c91f5cbf0e0d9f500275f7d869ac7:1:75121196")).openConnection();
+			InputStream in = connection.getInputStream();
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Results{
-        public String title;
+			nAPI = mapper.readValue(in, News.class);
 
-        @JsonProperty(value = "abstract")
-        public String shortDescription;
-        public String byline;
-        public String published_date;
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getShortDescription() {
-            return shortDescription;
-        }
-
-        public void setShortDescription(String shortDescription) {
-            this.shortDescription = shortDescription;
-        }
-
-        public String getByline() {
-            return byline;
-        }
-
-        public void setByline(String byline) {
-            this.byline = byline;
-        }
-
-        public String getPublished_date() {
-            return published_date;
-        }
-
-        public void setPublished_date(String published_date) {
-            this.published_date = published_date;
-        }
-
-        public String toString(){
-            StringBuilder sb = new StringBuilder();
-            sb.append(getTitle() + "\n" + getShortDescription()+"\n");
-            return sb.toString();
-        }
-    }
-
+		return nAPI;
+	}
 }
-
-
-

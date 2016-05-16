@@ -105,6 +105,9 @@ public class SMHIWeatherAPI {
                     case "pmedian":
                         hf.rainfallMedianAmount = value;
                         break;
+                    case "Wsymb":
+                        hf.weatherSymbol = (int) value;
+                        break;
                     default:
                         System.out.println("Did not find any match for valueName: " + p.getName());
                         break;
