@@ -105,6 +105,8 @@ public class Controller {
                     Label l = new Label(news.getResults().get(i).getTitle());
                     l.setFont(new Font(20));
                     newsBox.getChildren().add(l);
+                    newsScrollPane.setVvalue(1.0);
+                    redditScrollPane.setVvalue(1.0);
                 }
             });
         };
@@ -122,11 +124,6 @@ public class Controller {
                 temperatureLabel.setText(forecast.getTemp() + " °C");
                 windLabel.setText(forecast.getWindVelocity() + " m/s " + "max " + forecast.getWindGust() + " m/s");
                 rainForecastLabel.setText("Rain: " + forecast.getRainfallMeanAmount() + " mm");
-
-                Label l = new Label("flksdhsflkdfjdö scroll");
-                newsBox.getChildren().add(l);
-                newsScrollPane.setVvalue(1.0);
-                redditScrollPane.setVvalue(1.0);
 
             });
         };
