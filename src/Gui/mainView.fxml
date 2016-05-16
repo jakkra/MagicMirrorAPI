@@ -72,7 +72,7 @@
                   </Label>
                   <ScrollPane fx:id="redditScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
                      <content>
-                        <VBox />
+                        <VBox fx:id="redditBox" />
                      </content>
                   </ScrollPane>
                </children>
@@ -86,7 +86,7 @@
                   </Label>
                   <ScrollPane fx:id="newsScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
                      <content>
-                        <VBox />
+                        <VBox fx:id="newsBox" />
                      </content>
                   </ScrollPane>
                </children>

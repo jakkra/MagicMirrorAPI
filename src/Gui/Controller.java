@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import newyorktimes.News;
 import newyorktimes.NewsAPI;
@@ -99,15 +100,16 @@ public class Controller {
     private void startNewsUpdater() {
         Runnable updateNews = () -> {
             News news = newsAPI.getNews();
-
-
             Platform.runLater(() -> {
-
-
+                for (int i = 0; i < news.getResults().size(); i++) {
+                    Label l = new Label(news.getResults().get(i).getTitle());
+                    l.setFont(new Font(20));
+                    newsBox.getChildren().add(l);
+                }
             });
         };
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(updateNews, 0, 10, TimeUnit.MINUTES);
+        executor.scheduleAtFixedRate(updateNews, 0, 5, TimeUnit.MINUTES);
     }
 
     private void startWeatherUpdater() {
@@ -120,19 +122,25 @@ public class Controller {
                 temperatureLabel.setText(forecast.getTemp() + " °C");
                 windLabel.setText(forecast.getWindVelocity() + " m/s " + "max " + forecast.getWindGust() + " m/s");
                 rainForecastLabel.setText("Rain: " + forecast.getRainfallMeanAmount() + " mm");
+
+                Label l = new Label("flksdhsflkdfjdö scroll");
+                newsBox.getChildren().add(l);
+                newsScrollPane.setVvalue(1.0);
+                redditScrollPane.setVvalue(1.0);
+
             });
         };
 
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(updateWeather, 0, 10, TimeUnit.MINUTES);
+        executor.scheduleAtFixedRate(updateWeather, 0, 10, TimeUnit.SECONDS);
 
     }
+
     private String getDatePrint() {
         Calendar now = Calendar.getInstance();
         String monthOfYear = new SimpleDateFormat("EEEE d MMMM, y", Locale.ENGLISH).format(now.getTime());
         return monthOfYear;
     }
-
 
 
 }
