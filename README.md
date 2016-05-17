@@ -12,8 +12,23 @@ All configuration us done inside the config.properties file.
 
 New York Times API key retrieval can be found here: http://developer.nytimes.com/
 
+    # Weather location in long and latitude
+    lat=13.20
+    longitude=55.70
+
+    # Skånetrafiken parameters, start and end station name
+    hplatsD=Värnhem
+    hplatsA=Lund LTH
+
+    # Reddit parameters, subreddit to show posts from
+    subreddit=programming
+    #hot/new/rising/top
+    sort=hot
+
+    # News parameters world/technology/science/sports/trending
+    newsCat=technology
 ## Running
-´´´$ java -jar MagicMirrorAPI.jar´´´
+    $ java -jar MagicMirrorAPI.jar
 
 ## Pics
 
