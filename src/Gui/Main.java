@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("mainView.fxml"));
         primaryStage.setTitle("Smart Mirror");
-        Scene scene = new Scene(root, 1280, 720);
+        Scene scene = new Scene(root, 1080, 1920);
         primaryStage.setScene(scene);
         primaryStage.show();
 

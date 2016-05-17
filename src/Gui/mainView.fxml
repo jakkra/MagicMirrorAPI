@@ -23,8 +23,8 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="659.8210754394531" minHeight="30.85791015625" prefHeight="366.8343505859375" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="659.8210754394531" minHeight="30.85791015625" prefHeight="366.8343505859375" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="395.1824951171875" minHeight="30.85791015625" prefHeight="179.029296875" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="965.0" minHeight="30.85791015625" prefHeight="956.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="395.1824951171875" minHeight="30.85791015625" prefHeight="80.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="318.5941162109375" minHeight="30.85791015625" prefHeight="318.5941162109375" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -37,10 +37,13 @@
                   </Label>
                   <Label fx:id="dateLabel" alignment="TOP_CENTER" contentDisplay="TOP" text="2013-03-02" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="40.0" />
+                        <Font name="System Bold" size="32.0" />
                      </font>
                   </Label>
                </children>
+               <padding>
+                  <Insets top="50.0" />
+               </padding>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -78,7 +81,7 @@
                   </Label>
                   <ScrollPane fx:id="redditScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background: black; fx-border-color: black; -fx-background-color: transparent;" vbarPolicy="NEVER">
                      <content>
-                        <VBox fx:id="redditBox" style="-fx-background-color: black;" />
+                        <VBox fx:id="redditBox" spacing="10.0" style="-fx-background-color: black;" />
                      </content>
                   </ScrollPane>
                </children>
@@ -95,7 +98,7 @@
                   </Label>
                   <ScrollPane fx:id="newsScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background: black; fx-border-color: black; -fx-background-color: transparent;" vbarPolicy="NEVER">
                      <content>
-                        <VBox fx:id="newsBox" />
+                        <VBox fx:id="newsBox" spacing="10.0" />
                      </content>
                   </ScrollPane>
                </children>
@@ -107,12 +110,12 @@
                <children>
                   <Label fx:id="busDepartureTitle" text="Upcoming departures" textFill="WHITE">
                      <font>
-                        <Font size="30.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                   <Label fx:id="busDepartureLabel" text="Label" textFill="WHITE">
                      <font>
-                        <Font size="27.0" />
+                        <Font size="26.0" />
                      </font>
                   </Label>
                </children>

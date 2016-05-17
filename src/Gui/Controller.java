@@ -91,9 +91,9 @@ public class Controller {
             prop = new Properties();
             String propFileName = "config.properties";
             is = getClass().getClassLoader().getResourceAsStream(propFileName);
-            if (is!=null){
+            if (is != null) {
                 prop.load(is);
-            }else {
+            } else {
                 throw new FileNotFoundException("Filen kunde inte hittas");
             }
         } catch (FileNotFoundException e) {
@@ -116,7 +116,9 @@ public class Controller {
         startTimeAndDateUpdater();
         startAutoScroll();
         setWeatherFont(weatherIconLabel);
-        busDepartureTitle.setText("Upcoming departure to Lund LTH");
+        busDepartureTitle.setText("Upcoming departure to " + prop.getProperty("hplatsA"));
+        subredditLabel.setText("Reddit feed /" + prop.getProperty("subreddit"));
+        newsLabel.setText("News, " + prop.getProperty("newsCat"));
     }
 
     /**
@@ -140,7 +142,7 @@ public class Controller {
             ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys(prop.getProperty("hplatsD"), prop.getProperty("hplatsA"), 3);
             Platform.runLater(() -> {
                 redditBox.getChildren().clear();
-                for (int i = posts.size() - 1; i >=0; i--) {
+                for (int i = posts.size() - 1; i >= 0; i--) {
                     Label l = new Label("+" + posts.get(i).getScore() + " " + posts.get(i).getTitle());
                     l.setTextFill(Color.WHITE);
                     l.setFont(new Font(20));
@@ -205,14 +207,14 @@ public class Controller {
     private void startAutoScroll() {
         Runnable updateWeather = () -> Platform.runLater(() -> {
             double amount = redditScrollPane.getVvalue();
-            if(amount + 0.001 > redditScrollPane.getVmax()){
+            if (amount + 0.001 > redditScrollPane.getVmax()) {
                 amount = 0;
             } else {
                 amount += 0.001;
             }
             redditScrollPane.setVvalue(amount);
             amount = newsScrollPane.getVvalue();
-            if(amount + 0.001 > newsScrollPane.getVmax()){
+            if (amount + 0.001 > newsScrollPane.getVmax()) {
                 amount = 0;
             } else {
                 amount += 0.001;
