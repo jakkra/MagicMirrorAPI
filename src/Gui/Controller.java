@@ -85,15 +85,6 @@ public class Controller {
     @FXML
     VBox redditBox;
 
-    /*
-            String lat = prop.getProperty("lat");
-            String longitude = prop.getProperty("longitude");
-            String hpaltsD = prop.getProperty("hplatsD");
-            String hplatsA = prop.getProperty("hplatsA");
-            String subreddit = prop.getProperty("subreddit");
-            String sort = prop.getProperty("sort");
-            String newsCat = prop.getProperty("newsCat");
-     */
 
     public Controller() {
         try {
@@ -123,6 +114,7 @@ public class Controller {
         startNewsUpdater();
         startRedditAndBusUpdater();
         startTimeAndDateUpdater();
+        startAutoScroll();
         setWeatherFont(weatherIconLabel);
         busDepartureTitle.setText("Upcoming departure to Lund LTH");
     }
@@ -147,12 +139,12 @@ public class Controller {
             ArrayList<Post> posts = redditFlow.getFlow();
             ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys(prop.getProperty("hplatsD"), prop.getProperty("hplatsA"), 3);
             Platform.runLater(() -> {
+                redditBox.getChildren().clear();
                 for (int i = posts.size() - 1; i >=0; i--) {
                     Label l = new Label("+" + posts.get(i).getScore() + " " + posts.get(i).getTitle());
                     l.setTextFill(Color.WHITE);
                     l.setFont(new Font(20));
                     redditBox.getChildren().add(l);
-                    redditScrollPane.setVvalue(1.0);
                 }
                 StringBuilder sb = new StringBuilder();
                 for (Journey j : journeys) {
@@ -179,12 +171,12 @@ public class Controller {
         Runnable updateNews = () -> {
             News news = newsAPI.getNews();
             Platform.runLater(() -> {
+                newsBox.getChildren().clear();
                 for (int i = 0; i < news.getResults().size(); i++) {
                     Label l = new Label(news.getResults().get(i).getTitle());
                     l.setTextFill(Color.WHITE);
                     l.setFont(new Font(20));
                     newsBox.getChildren().add(l);
-                    newsScrollPane.setVvalue(1.0);
                 }
             });
         };
@@ -210,6 +202,30 @@ public class Controller {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(updateWeather, 0, 10, TimeUnit.MINUTES);
     }
+
+    private void startAutoScroll() {
+        Runnable updateWeather = () -> Platform.runLater(() -> {
+            double amount = redditScrollPane.getVvalue();
+            if(amount + 0.001 > redditScrollPane.getVmax()){
+                amount = 0;
+            } else {
+                amount += 0.001;
+            }
+            redditScrollPane.setVvalue(amount);
+            amount = newsScrollPane.getVvalue();
+            if(amount + 0.001 > newsScrollPane.getVmax()){
+                amount = 0;
+            } else {
+                amount += 0.001;
+            }
+            newsScrollPane.setVvalue(amount);
+
+        });
+
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(updateWeather, 0, 100, TimeUnit.MILLISECONDS);
+    }
+
 
     private String getDatePrint() {
         Calendar now = Calendar.getInstance();

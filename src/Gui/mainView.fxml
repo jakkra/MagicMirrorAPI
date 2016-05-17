@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -20,7 +24,6 @@
         <rowConstraints>
             <RowConstraints maxHeight="659.8210754394531" minHeight="30.85791015625" prefHeight="366.8343505859375" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="659.8210754394531" minHeight="30.85791015625" prefHeight="366.8343505859375" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="652.970703125" minHeight="30.85791015625" prefHeight="652.970703125" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="395.1824951171875" minHeight="30.85791015625" prefHeight="179.029296875" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="318.5941162109375" minHeight="30.85791015625" prefHeight="318.5941162109375" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -62,8 +65,11 @@
                      </font>
                   </Label>
                </children>
+               <padding>
+                  <Insets top="50.0" />
+               </padding>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3" GridPane.rowSpan="2">
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2" GridPane.rowSpan="2">
                <children>
                   <Label fx:id="subredditLabel" text="Reddit feed /programming" textFill="WHITE">
                      <font>
@@ -76,8 +82,11 @@
                      </content>
                   </ScrollPane>
                </children>
+               <GridPane.margin>
+                  <Insets right="30.0" />
+               </GridPane.margin>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2">
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2">
                <children>
                   <Label fx:id="newsLabel" text="News" textFill="WHITE">
                      <font>
@@ -90,6 +99,9 @@
                      </content>
                   </ScrollPane>
                </children>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>

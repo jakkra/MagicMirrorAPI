@@ -71,7 +71,6 @@ public class Station {
             //  setLatLng(x, y);
         }
     }
-    //TODO update so it doesn't just work on Android, but in desktop Java also (Because of LatLng class
 
     /*private void setLatLng(double x, double y) {
         RT90Position position = new RT90Position(x, y);
