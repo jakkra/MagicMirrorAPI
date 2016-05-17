@@ -10,7 +10,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane prefHeight="1920.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller">
+<AnchorPane prefHeight="1920.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller">
    <children>
       <GridPane fx:id="gridPane" layoutX="3.0" layoutY="-10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-10.0">
         <columnConstraints>
@@ -27,12 +27,12 @@
          <children>
             <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1">
                <children>
-                  <Label fx:id="timeLabel" alignment="CENTER_RIGHT" contentDisplay="TOP" text="18:20">
+                  <Label fx:id="timeLabel" alignment="CENTER_RIGHT" contentDisplay="TOP" text="18:20" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="80.0" />
                      </font>
                   </Label>
-                  <Label fx:id="dateLabel" alignment="TOP_CENTER" contentDisplay="TOP" text="2013-03-02" textAlignment="CENTER">
+                  <Label fx:id="dateLabel" alignment="TOP_CENTER" contentDisplay="TOP" text="2013-03-02" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="40.0" />
                      </font>
@@ -41,22 +41,22 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="weatherIconLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="114.0" prefWidth="434.0" text="Label">
+                  <Label fx:id="weatherIconLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="114.0" prefWidth="434.0" text="Label" textFill="WHITE">
                      <font>
-                        <Font size="96.0" />
+                        <Font size="120.0" />
                      </font>
                   </Label>
-                  <Label fx:id="temperatureLabel" text="15 C">
+                  <Label fx:id="temperatureLabel" text="15 C" textFill="WHITE">
                      <font>
                         <Font size="56.0" />
                      </font>
                   </Label>
-                  <Label fx:id="windLabel" text="2 ms/s SE max 4 m/s">
+                  <Label fx:id="windLabel" text="2 ms/s SE max 4 m/s" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="rainForecastLabel" text="Rain max 2mm">
+                  <Label fx:id="rainForecastLabel" text="Rain max 2mm" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -65,26 +65,26 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3" GridPane.rowSpan="2">
                <children>
-                  <Label fx:id="subredditLabel" text="Reddit feed /programming">
+                  <Label fx:id="subredditLabel" text="Reddit feed /programming" textFill="WHITE">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <ScrollPane fx:id="redditScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="redditScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background: black; fx-border-color: black; -fx-background-color: transparent;" vbarPolicy="NEVER">
                      <content>
-                        <VBox fx:id="redditBox" />
+                        <VBox fx:id="redditBox" style="-fx-background-color: black;" />
                      </content>
                   </ScrollPane>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2">
                <children>
-                  <Label fx:id="newsLabel" text="News">
+                  <Label fx:id="newsLabel" text="News" textFill="WHITE">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <ScrollPane fx:id="newsScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="newsScrollPane" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="434.0" style="-fx-background: black; fx-border-color: black; -fx-background-color: transparent;" vbarPolicy="NEVER">
                      <content>
                         <VBox fx:id="newsBox" />
                      </content>

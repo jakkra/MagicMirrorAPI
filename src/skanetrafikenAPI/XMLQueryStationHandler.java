@@ -1,6 +1,6 @@
 package skanetrafikenAPI;
 /*
- * Created by krantz on 14-11-18.
+ * Created by Jakkra
  */
 
 import org.xml.sax.Attributes;

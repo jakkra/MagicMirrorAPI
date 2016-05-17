@@ -7,15 +7,24 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import newyorktimes.News;
 import newyorktimes.NewsAPI;
+import reddit.Post;
+import reddit.RedditApi;
+import reddit.RedditFlow;
+import skanetrafikenAPI.SkanetrafikenAPI;
 import smhi.Forecasts;
 import smhi.HourlyForecast;
 import smhi.SMHIWeatherAPI;
+import smhi.WeatherConditionCodes;
 
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.Executors;
@@ -31,6 +40,8 @@ import java.util.concurrent.TimeUnit;
 public class Controller {
     private SMHIWeatherAPI weatherApi;
     private NewsAPI newsAPI;
+    private RedditFlow redditFlow;
+
     @FXML
     Label weatherIconLabel;
     @FXML
@@ -65,7 +76,8 @@ public class Controller {
     public Controller() {
         this.weatherApi = new SMHIWeatherAPI("13.191", "55.704");
         this.newsAPI = new NewsAPI();
-
+        this.redditFlow = new RedditFlow("programming", "hot");
+        SkanetrafikenAPI skanetrafikenAPI = new SkanetrafikenAPI();
     }
 
 
@@ -75,6 +87,8 @@ public class Controller {
         startNewsUpdater();
         startRedditUpdater();
         startTimeAndDateUpdater();
+        setWeatherFont(weatherIconLabel);
+
 
     }
 
@@ -94,6 +108,20 @@ public class Controller {
     }
 
     private void startRedditUpdater() {
+        Runnable updateNews = () -> {
+            ArrayList<Post> posts = redditFlow.getFlow();
+            Platform.runLater(() -> {
+                for (int i = posts.size() - 1; i >=0; i--) {
+                    Label l = new Label("+" + posts.get(i).getScore() + " " + posts.get(i).getTitle());
+                    l.setTextFill(Color.WHITE);
+                    l.setFont(new Font(20));
+                    redditBox.getChildren().add(l);
+                    redditScrollPane.setVvalue(1.0);
+                }
+            });
+        };
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(updateNews, 0, 1, TimeUnit.MINUTES);
 
     }
 
@@ -103,10 +131,10 @@ public class Controller {
             Platform.runLater(() -> {
                 for (int i = 0; i < news.getResults().size(); i++) {
                     Label l = new Label(news.getResults().get(i).getTitle());
+                    l.setTextFill(Color.WHITE);
                     l.setFont(new Font(20));
                     newsBox.getChildren().add(l);
                     newsScrollPane.setVvalue(1.0);
-                    redditScrollPane.setVvalue(1.0);
                 }
             });
         };
@@ -121,6 +149,7 @@ public class Controller {
             System.out.println(forecast.toString());
 
             Platform.runLater(() -> {
+                weatherIconLabel.setText(WeatherConditionCodes.fromInt(forecast.getWeatherSymbol()).toString());
                 temperatureLabel.setText(forecast.getTemp() + " °C");
                 windLabel.setText(forecast.getWindVelocity() + " m/s " + "max " + forecast.getWindGust() + " m/s");
                 rainForecastLabel.setText("Rain: " + forecast.getRainfallMeanAmount() + " mm");
@@ -129,7 +158,7 @@ public class Controller {
         };
 
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(updateWeather, 0, 10, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(updateWeather, 0, 10, TimeUnit.MINUTES);
 
     }
 
@@ -137,6 +166,23 @@ public class Controller {
         Calendar now = Calendar.getInstance();
         String monthOfYear = new SimpleDateFormat("EEEE d MMMM, y", Locale.ENGLISH).format(now.getTime());
         return monthOfYear;
+    }
+
+    /**
+     * Sets the weather font from https://erikflowers.github.io/weather-icons/
+     * to a Label
+     *
+     * @param weatherLabel
+     */
+    private void setWeatherFont(Label weatherLabel) {
+        Font f = null;
+        try {
+            URL url = getClass().getResource("/fonts/weathericons-regular-webfont.ttf");
+            f = Font.loadFont(url.openStream(), 120);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        weatherLabel.setFont(f);
     }
 
 

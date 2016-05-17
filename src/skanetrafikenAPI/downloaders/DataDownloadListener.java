@@ -1,6 +1,6 @@
 package skanetrafikenAPI.downloaders;
 /*
- * Created by jakkra on 2015-03-02.
+ * Created by jakkra
  */
 
 public interface DataDownloadListener {

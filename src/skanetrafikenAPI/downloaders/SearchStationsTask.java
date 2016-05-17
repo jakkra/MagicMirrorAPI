@@ -1,6 +1,6 @@
 package skanetrafikenAPI.downloaders;
 /*
- * Created by krantz on 14-11-19.
+ * Created by Jakkra
  */
 
 

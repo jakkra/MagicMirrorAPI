@@ -1,6 +1,6 @@
 package skanetrafikenAPI;
 /*
- * Created by jakkra on 2015-03-03.
+ * Created by Jakkra
  */
 
 public class Point {

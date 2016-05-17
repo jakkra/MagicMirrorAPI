@@ -1,5 +1,6 @@
-package skanetrafikenAPI;/*
- * Created by krantz on 16-04-24.
+package skanetrafikenAPI;
+/*
+ * Created by Jakkra
  */
 
 import skanetrafikenAPI.downloaders.SearchJourneysTask;

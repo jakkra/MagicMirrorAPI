@@ -1,5 +1,6 @@
-package skanetrafikenAPI;/*
- * Created by krantz on 14-11-19.
+package skanetrafikenAPI;
+/*
+ * Created by Jakkra
  */
 
 
