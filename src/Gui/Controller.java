@@ -15,7 +15,9 @@ import newyorktimes.NewsAPI;
 import reddit.Post;
 import reddit.RedditFlow;
 import skanetrafikenAPI.Journey;
+import skanetrafikenAPI.RouteLink;
 import skanetrafikenAPI.SkanetrafikenAPI;
+import skanetrafikenAPI.TimeAndDateConverter;
 import smhi.Forecasts;
 import smhi.HourlyForecast;
 import smhi.SMHIWeatherAPI;
@@ -115,7 +117,7 @@ public class Controller {
     private void startRedditAndBusUpdater() {
         Runnable updateNews = () -> {
             ArrayList<Post> posts = redditFlow.getFlow();
-            ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys("Värnhem", "Lund LTH", 5);
+            ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys("Värnhem", "Lund LTH", 3);
             Platform.runLater(() -> {
                 for (int i = posts.size() - 1; i >=0; i--) {
                     Label l = new Label("+" + posts.get(i).getScore() + " " + posts.get(i).getTitle());
@@ -124,6 +126,21 @@ public class Controller {
                     redditBox.getChildren().add(l);
                     redditScrollPane.setVvalue(1.0);
                 }
+                StringBuilder b = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
+                for (Journey j : journeys) {
+                    String depTime = TimeAndDateConverter.timeToDeparture(j.getDepDateTime());
+                    if (j.deviationType() == RouteLink.EARLY) {
+                        sb.append(j.getFirstRouteLineNbr() + "" + depTime + " (" + j.getDeviationDepTime() + " early)\n");
+                    } else if (j.deviationType() == RouteLink.LATE) {
+                        sb.append(j.getFirstRouteLineNbr() + " " + depTime + " (" + j.getDeviationDepTime() + " late)\n");
+                    } else if (j.deviationType() == RouteLink.IN_TIME) {
+                        sb.append(j.getFirstRouteLineNbr() + " " + depTime + " (in time)\n");
+                    } else {
+                        sb.append(j.getFirstRouteLineNbr() + " in " + depTime + "\n");
+                    }
+                }
+                System.out.println(sb.toString());
             });
         };
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
