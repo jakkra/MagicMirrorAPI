@@ -12,9 +12,11 @@ import java.net.URL;
 public class NewsAPI {
 	private News nAPI;
 	private String sec;
+	String APIkey;
 
-	public NewsAPI(String sec){
+	public NewsAPI(String sec, String APIkey){
 		this.sec = sec;
+		this.APIkey = APIkey;
 	}
 
 	public News getNews(){
@@ -22,7 +24,7 @@ public class NewsAPI {
 		URLConnection connection = null;
 
 		try{
-			connection = (new URL("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/" + sec + "/7.json?api-key=568c91f5cbf0e0d9f500275f7d869ac7:1:75121196")).openConnection();
+			connection = (new URL("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/" + sec + "/7.json?api-key="+APIkey)).openConnection();
 			InputStream in = connection.getInputStream();
 
 			nAPI = mapper.readValue(in, News.class);

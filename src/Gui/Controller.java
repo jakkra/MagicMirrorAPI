@@ -23,9 +23,7 @@ import smhi.HourlyForecast;
 import smhi.SMHIWeatherAPI;
 import smhi.WeatherConditionCodes;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -87,22 +85,23 @@ public class Controller {
 
 
     public Controller() {
+        prop = new Properties();
         try {
-            prop = new Properties();
-            String propFileName = "config.properties";
-            is = getClass().getClassLoader().getResourceAsStream(propFileName);
-            if (is != null) {
-                prop.load(is);
-            } else {
-                throw new FileNotFoundException("Filen kunde inte hittas");
+            File jarPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+            System.out.println(jarPath.getAbsolutePath());
+            String propFileName = jarPath.getAbsolutePath();
+            if(propFileName.endsWith(".jar")){
+                propFileName = jarPath.getParentFile().getAbsolutePath();
             }
+            System.out.println(propFileName+"/config.properties");
+            prop.load(new FileInputStream(propFileName+"/config.properties"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         this.weatherApi = new SMHIWeatherAPI(prop.getProperty("lat"), prop.getProperty("longitude"));
-        this.newsAPI = new NewsAPI(prop.getProperty("newsCat"));
+        this.newsAPI = new NewsAPI(prop.getProperty("newsCat"),prop.getProperty("APIkey"));
         this.redditFlow = new RedditFlow(prop.getProperty("subreddit"), prop.getProperty("sort"));
         this.skanetrafikenAPI = new SkanetrafikenAPI();
     }
