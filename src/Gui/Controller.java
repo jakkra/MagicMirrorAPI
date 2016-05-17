@@ -126,21 +126,20 @@ public class Controller {
                     redditBox.getChildren().add(l);
                     redditScrollPane.setVvalue(1.0);
                 }
-                StringBuilder b = new StringBuilder();
-                final StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
                 for (Journey j : journeys) {
                     String depTime = TimeAndDateConverter.timeToDeparture(j.getDepDateTime());
                     if (j.deviationType() == RouteLink.EARLY) {
-                        sb.append(j.getFirstRouteLineNbr() + "" + depTime + " (" + j.getDeviationDepTime() + " early)\n");
+                        sb.append(j.getFirstRouteLineNbr() + "" + depTime + " (" + j.getDeviationDepTimeToString() + " early)\n");
                     } else if (j.deviationType() == RouteLink.LATE) {
-                        sb.append(j.getFirstRouteLineNbr() + " " + depTime + " (" + j.getDeviationDepTime() + " late)\n");
+                        sb.append(j.getFirstRouteLineNbr() + " " + depTime + " (" + j.getDeviationDepTimeToString() + " late)\n");
                     } else if (j.deviationType() == RouteLink.IN_TIME) {
                         sb.append(j.getFirstRouteLineNbr() + " " + depTime + " (in time)\n");
                     } else {
                         sb.append(j.getFirstRouteLineNbr() + " in " + depTime + "\n");
                     }
                 }
-                System.out.println(sb.toString());
+                busDepartureLabel.setText(sb.toString());
             });
         };
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
