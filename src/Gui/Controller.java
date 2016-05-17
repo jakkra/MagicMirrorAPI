@@ -13,8 +13,8 @@ import javafx.util.Duration;
 import newyorktimes.News;
 import newyorktimes.NewsAPI;
 import reddit.Post;
-import reddit.RedditApi;
 import reddit.RedditFlow;
+import skanetrafikenAPI.Journey;
 import skanetrafikenAPI.SkanetrafikenAPI;
 import smhi.Forecasts;
 import smhi.HourlyForecast;
@@ -38,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class Controller {
+    private final SkanetrafikenAPI skanetrafikenAPI;
     private SMHIWeatherAPI weatherApi;
     private NewsAPI newsAPI;
     private RedditFlow redditFlow;
@@ -62,6 +63,11 @@ public class Controller {
     Label newsLabel;
 
     @FXML
+    Label busDepartureLabel;
+    @FXML
+    Label busDepartureTitle;
+
+    @FXML
     ScrollPane redditScrollPane;
     @FXML
     ScrollPane newsScrollPane;
@@ -77,7 +83,7 @@ public class Controller {
         this.weatherApi = new SMHIWeatherAPI("13.191", "55.704");
         this.newsAPI = new NewsAPI();
         this.redditFlow = new RedditFlow("programming", "hot");
-        SkanetrafikenAPI skanetrafikenAPI = new SkanetrafikenAPI();
+        this.skanetrafikenAPI = new SkanetrafikenAPI();
     }
 
 
@@ -85,11 +91,10 @@ public class Controller {
     public void initialize() {
         startWeatherUpdater();
         startNewsUpdater();
-        startRedditUpdater();
+        startRedditAndBusUpdater();
         startTimeAndDateUpdater();
         setWeatherFont(weatherIconLabel);
-
-
+        busDepartureTitle.setText("Upcoming departure to Lund LTH");
     }
 
     /**
@@ -107,9 +112,10 @@ public class Controller {
 
     }
 
-    private void startRedditUpdater() {
+    private void startRedditAndBusUpdater() {
         Runnable updateNews = () -> {
             ArrayList<Post> posts = redditFlow.getFlow();
+            ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys("Värnhem", "Lund LTH", 5);
             Platform.runLater(() -> {
                 for (int i = posts.size() - 1; i >=0; i--) {
                     Label l = new Label("+" + posts.get(i).getScore() + " " + posts.get(i).getTitle());
@@ -159,7 +165,6 @@ public class Controller {
 
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(updateWeather, 0, 10, TimeUnit.MINUTES);
-
     }
 
     private String getDatePrint() {
