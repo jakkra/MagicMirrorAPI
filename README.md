@@ -13,7 +13,9 @@ All configuration us done inside the config.properties file.
 New York Times API key retrieval can be found here: http://developer.nytimes.com/
 
 ## Running
-´$ java -jar MagicMirrorAPI.jar´
+´´´$ java -jar MagicMirrorAPI.jar´´´
+
+## Pics
 
 ![Mirror](pics/IMG_20160517_164826.jpg)
 
