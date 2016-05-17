@@ -27,6 +27,10 @@ New York Times API key retrieval can be found here: http://developer.nytimes.com
 
     # News parameters world/technology/science/sports/trending
     newsCat=technology
+
+    #APIkey for NYTimes received from http://developer.nytimes.com/
+     +APIkey=key
+
 ## Running
     $ java -jar MagicMirrorAPI.jar
 
