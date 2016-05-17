@@ -96,10 +96,6 @@ public class Controller {
      */
 
     public Controller() {
-        this.weatherApi = new SMHIWeatherAPI("13.191", "55.704");
-        this.newsAPI = new NewsAPI();
-        this.redditFlow = new RedditFlow("programming", "hot");
-        this.skanetrafikenAPI = new SkanetrafikenAPI();
         try {
             prop = new Properties();
             String propFileName = "config.properties";
@@ -114,6 +110,10 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.weatherApi = new SMHIWeatherAPI(prop.getProperty("lat"), prop.getProperty("longitude"));
+        this.newsAPI = new NewsAPI(prop.getProperty("newsCat"));
+        this.redditFlow = new RedditFlow(prop.getProperty("subreddit"), prop.getProperty("sort"));
+        this.skanetrafikenAPI = new SkanetrafikenAPI();
     }
 
 
