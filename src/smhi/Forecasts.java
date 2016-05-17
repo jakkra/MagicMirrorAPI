@@ -23,7 +23,6 @@ public class Forecasts {
     public HourlyForecast getCurrentWeather() {
         Date now = new Date();
         Date forecastDate;
-        System.out.println(now.toString());
         HourlyForecast hf;
         SimpleDateFormat sb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 

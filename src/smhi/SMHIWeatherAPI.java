@@ -22,7 +22,6 @@ public class SMHIWeatherAPI {
         JsonWeatherAsObject jsonObject = null;
         try {
             String url = "http://opendata-download-metfcst.smhi.se/api/category/pmp2g/version/2/geotype/point/lon/" + longitude + "/lat/" + latitude + "/data.json";
-            System.out.println(url);
             jsonObject = mapper.readValue(new URL(url), JsonWeatherAsObject.class);
         } catch (IOException e) {
             e.printStackTrace();

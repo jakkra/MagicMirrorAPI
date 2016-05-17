@@ -67,9 +67,7 @@ public enum WeatherConditionCodes {
     }
 
     public static WeatherConditionCodes fromInt(int smhiCode) {
-        System.out.println("SMHI code: " + smhiCode);
         int code = convertCodeDependingOnTime(smhiCode);
-        System.out.println("OUR code: " + code);
 
         for (WeatherConditionCodes w : WeatherConditionCodes.values()) {
             if (w.code == code) {

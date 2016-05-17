@@ -44,7 +44,6 @@ public class SkanetrafikenAPI {
         }
 
         String journey = Constants.getURL(savedStationIds.get(fromStation), savedStationIds.get(toStation), nbrResults);
-        System.out.println(journey);
         SearchJourneysTask jTask = new SearchJourneysTask();
         return jTask.download(journey);
     }

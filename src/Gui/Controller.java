@@ -188,7 +188,6 @@ public class Controller {
         Runnable updateWeather = () -> {
             Forecasts f = weatherApi.getForecasts();
             HourlyForecast forecast = f.getCurrentWeather();
-            System.out.println(forecast.toString());
 
             Platform.runLater(() -> {
                 weatherIconLabel.setText(WeatherConditionCodes.fromInt(forecast.getWeatherSymbol()).toString());
