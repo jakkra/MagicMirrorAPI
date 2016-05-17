@@ -32,6 +32,7 @@ New York Times API key retrieval can be found here: http://developer.nytimes.com
      +APIkey=key
 
 ## Running
+Have the jar and the config.properties files in the same folder before running.
     $ java -jar MagicMirrorAPI.jar
 
 ## Pics
