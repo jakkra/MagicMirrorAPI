@@ -23,12 +23,15 @@ import smhi.HourlyForecast;
 import smhi.SMHIWeatherAPI;
 import smhi.WeatherConditionCodes;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +47,8 @@ public class Controller {
     private SMHIWeatherAPI weatherApi;
     private NewsAPI newsAPI;
     private RedditFlow redditFlow;
+    private Properties prop;
+    private InputStream is;
 
     @FXML
     Label weatherIconLabel;
@@ -80,12 +85,35 @@ public class Controller {
     @FXML
     VBox redditBox;
 
+    /*
+            String lat = prop.getProperty("lat");
+            String longitude = prop.getProperty("longitude");
+            String hpaltsD = prop.getProperty("hplatsD");
+            String hplatsA = prop.getProperty("hplatsA");
+            String subreddit = prop.getProperty("subreddit");
+            String sort = prop.getProperty("sort");
+            String newsCat = prop.getProperty("newsCat");
+     */
 
     public Controller() {
         this.weatherApi = new SMHIWeatherAPI("13.191", "55.704");
         this.newsAPI = new NewsAPI();
         this.redditFlow = new RedditFlow("programming", "hot");
         this.skanetrafikenAPI = new SkanetrafikenAPI();
+        try {
+            prop = new Properties();
+            String propFileName = "config.properties";
+            is = getClass().getClassLoader().getResourceAsStream(propFileName);
+            if (is!=null){
+                prop.load(is);
+            }else {
+                throw new FileNotFoundException("Filen kunde inte hittas");
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -117,7 +145,7 @@ public class Controller {
     private void startRedditAndBusUpdater() {
         Runnable updateNews = () -> {
             ArrayList<Post> posts = redditFlow.getFlow();
-            ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys("Värnhem", "Lund LTH", 3);
+            ArrayList<Journey> journeys = skanetrafikenAPI.getJourneys(prop.getProperty("hplatsD"), prop.getProperty("hplatsA"), 3);
             Platform.runLater(() -> {
                 for (int i = posts.size() - 1; i >=0; i--) {
                     Label l = new Label("+" + posts.get(i).getScore() + " " + posts.get(i).getTitle());
