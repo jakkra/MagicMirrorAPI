@@ -41,3 +41,5 @@ Have the jar and the config.properties files in the same folder before running.
 ![Mirror](pics/IMG_20160517_164826.jpg)
 
 ![Mirror](pics/IMG_20160517_164955.jpg)
+
+![Mirror](pics/ezgif.com-video-to-gif.gif)
